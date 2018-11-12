@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Nishant_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="todo_sts">
+    <Key>
+      <PropertyRef Name="st_cd" />
+    </Key>
+    <Property Name="st_cd" Type="int" Nullable="false" />
+    <Property Name="st_desc" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="todos">
+    <Key>
+      <PropertyRef Name="todo_id" />
+    </Key>
+    <Property Name="todo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descpt" Type="varchar" MaxLength="1500" />
+    <Property Name="st_cd" Type="int" />
+    <Property Name="crt_dt" Type="datetime" />
+  </EntityType>
+  <Association Name="FK__todos__st_cd__276EDEB3">
+    <End Role="todo_sts" Type="Self.todo_sts" Multiplicity="0..1" />
+    <End Role="todos" Type="Self.todos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="todo_sts">
+        <PropertyRef Name="st_cd" />
+      </Principal>
+      <Dependent Role="todos">
+        <PropertyRef Name="st_cd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Nishant_DBModelStoreContainer">
+    <EntitySet Name="todo_sts" EntityType="Self.todo_sts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="todos" EntityType="Self.todos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__todos__st_cd__276EDEB3" Association="Self.FK__todos__st_cd__276EDEB3">
+      <End Role="todo_sts" EntitySet="todo_sts" />
+      <End Role="todos" EntitySet="todos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Nishant_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="todo_sts">
+          <Key>
+            <PropertyRef Name="st_cd" />
+          </Key>
+          <Property Name="st_cd" Type="int" Nullable="false" />
+          <Property Name="st_desc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="todos">
+          <Key>
+            <PropertyRef Name="todo_id" />
+          </Key>
+          <Property Name="todo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descpt" Type="varchar" MaxLength="1500" />
+          <Property Name="st_cd" Type="int" />
+          <Property Name="crt_dt" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__todos__st_cd__276EDEB3">
+          <End Role="todo_sts" Type="Self.todo_sts" Multiplicity="0..1" />
+          <End Role="todos" Type="Self.todos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="todo_sts">
+              <PropertyRef Name="st_cd" />
+            </Principal>
+            <Dependent Role="todos">
+              <PropertyRef Name="st_cd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Nishant_DBModelStoreContainer">
+          <EntitySet Name="todo_sts" EntityType="Self.todo_sts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="todos" EntityType="Self.todos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__todos__st_cd__276EDEB3" Association="Self.FK__todos__st_cd__276EDEB3">
+            <End Role="todo_sts" EntitySet="todo_sts" />
+            <End Role="todos" EntitySet="todos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Nishant_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="todo_sts">
+          <Key>
+            <PropertyRef Name="st_cd" />
+          </Key>
+          <Property Name="st_cd" Type="Int32" Nullable="false" />
+          <Property Name="st_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="todos" Relationship="Self.FK__todos__st_cd__276EDEB3" FromRole="todo_sts" ToRole="todos" />
+        </EntityType>
+        <EntityType Name="todo">
+          <Key>
+            <PropertyRef Name="todo_id" />
+          </Key>
+          <Property Name="todo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descpt" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="st_cd" Type="Int32" />
+          <Property Name="crt_dt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="todo_sts" Relationship="Self.FK__todos__st_cd__276EDEB3" FromRole="todos" ToRole="todo_sts" />
+        </EntityType>
+        <Association Name="FK__todos__st_cd__276EDEB3">
+          <End Role="todo_sts" Type="Self.todo_sts" Multiplicity="0..1" />
+          <End Role="todos" Type="Self.todo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="todo_sts">
+              <PropertyRef Name="st_cd" />
+            </Principal>
+            <Dependent Role="todos">
+              <PropertyRef Name="st_cd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Nishant_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="todo_sts" EntityType="Self.todo_sts" />
+          <EntitySet Name="todos" EntityType="Self.todo" />
+          <AssociationSet Name="FK__todos__st_cd__276EDEB3" Association="Self.FK__todos__st_cd__276EDEB3">
+            <End Role="todo_sts" EntitySet="todo_sts" />
+            <End Role="todos" EntitySet="todos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Nishant_DBModelStoreContainer" CdmEntityContainer="Nishant_DBEntities">
+          <EntitySetMapping Name="todo_sts">
+            <EntityTypeMapping TypeName="Nishant_DBModel.todo_sts">
+              <MappingFragment StoreEntitySet="todo_sts">
+                <ScalarProperty Name="st_cd" ColumnName="st_cd" />
+                <ScalarProperty Name="st_desc" ColumnName="st_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="todos">
+            <EntityTypeMapping TypeName="Nishant_DBModel.todo">
+              <MappingFragment StoreEntitySet="todos">
+                <ScalarProperty Name="todo_id" ColumnName="todo_id" />
+                <ScalarProperty Name="descpt" ColumnName="descpt" />
+                <ScalarProperty Name="st_cd" ColumnName="st_cd" />
+                <ScalarProperty Name="crt_dt" ColumnName="crt_dt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

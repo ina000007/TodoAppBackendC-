@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Nishant_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="todo_sts">
+    <Key>
+      <PropertyRef Name="st_cd" />
+    </Key>
+    <Property Name="st_cd" Type="Int32" Nullable="false" />
+    <Property Name="st_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="todos" Relationship="Self.FK__todos__st_cd__276EDEB3" FromRole="todo_sts" ToRole="todos" />
+  </EntityType>
+  <EntityType Name="todo">
+    <Key>
+      <PropertyRef Name="todo_id" />
+    </Key>
+    <Property Name="todo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descpt" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+    <Property Name="st_cd" Type="Int32" />
+    <Property Name="crt_dt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="todo_sts" Relationship="Self.FK__todos__st_cd__276EDEB3" FromRole="todos" ToRole="todo_sts" />
+  </EntityType>
+  <Association Name="FK__todos__st_cd__276EDEB3">
+    <End Role="todo_sts" Type="Self.todo_sts" Multiplicity="0..1" />
+    <End Role="todos" Type="Self.todo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="todo_sts">
+        <PropertyRef Name="st_cd" />
+      </Principal>
+      <Dependent Role="todos">
+        <PropertyRef Name="st_cd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Nishant_DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="todo_sts" EntityType="Self.todo_sts" />
+    <EntitySet Name="todos" EntityType="Self.todo" />
+    <AssociationSet Name="FK__todos__st_cd__276EDEB3" Association="Self.FK__todos__st_cd__276EDEB3">
+      <End Role="todo_sts" EntitySet="todo_sts" />
+      <End Role="todos" EntitySet="todos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

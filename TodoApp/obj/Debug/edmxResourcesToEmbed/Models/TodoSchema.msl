@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Nishant_DBModelStoreContainer" CdmEntityContainer="Nishant_DBEntities">
+    <EntitySetMapping Name="todo_sts">
+      <EntityTypeMapping TypeName="Nishant_DBModel.todo_sts">
+        <MappingFragment StoreEntitySet="todo_sts">
+          <ScalarProperty Name="st_cd" ColumnName="st_cd" />
+          <ScalarProperty Name="st_desc" ColumnName="st_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="todos">
+      <EntityTypeMapping TypeName="Nishant_DBModel.todo">
+        <MappingFragment StoreEntitySet="todos">
+          <ScalarProperty Name="todo_id" ColumnName="todo_id" />
+          <ScalarProperty Name="descpt" ColumnName="descpt" />
+          <ScalarProperty Name="st_cd" ColumnName="st_cd" />
+          <ScalarProperty Name="crt_dt" ColumnName="crt_dt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
