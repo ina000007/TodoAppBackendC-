@@ -18,7 +18,9 @@ namespace TodoApp.Models
         public string descpt { get; set; }
         public Nullable<int> st_cd { get; set; }
         public Nullable<System.DateTime> crt_dt { get; set; }
+        public Nullable<int> todo_type_cd { get; set; }
     
         public virtual todo_sts todo_sts { get; set; }
+        public virtual todo_type todo_type { get; set; }
     }
 }

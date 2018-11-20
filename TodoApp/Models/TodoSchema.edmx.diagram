@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="Nishant_DBModel.todo_sts" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Nishant_DBModel.todo" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="Nishant_DBModel.FK__todos__st_cd__276EDEB3" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Nishant_DBModel.todo_type" Width="1.5" PointX="0.75" PointY="4.875" />
+        <AssociationConnector Association="Nishant_DBModel.FK__todos__todo_type__37A5467C" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

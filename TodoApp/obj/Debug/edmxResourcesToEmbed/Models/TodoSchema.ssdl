@@ -7,6 +7,13 @@
     <Property Name="st_cd" Type="int" Nullable="false" />
     <Property Name="st_desc" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="todo_type">
+    <Key>
+      <PropertyRef Name="todo_type_cd" />
+    </Key>
+    <Property Name="todo_type_cd" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="todo_type_desc" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="todos">
     <Key>
       <PropertyRef Name="todo_id" />
@@ -15,6 +22,7 @@
     <Property Name="descpt" Type="varchar" MaxLength="1500" />
     <Property Name="st_cd" Type="int" />
     <Property Name="crt_dt" Type="datetime" />
+    <Property Name="todo_type_cd" Type="int" />
   </EntityType>
   <Association Name="FK__todos__st_cd__276EDEB3">
     <End Role="todo_sts" Type="Self.todo_sts" Multiplicity="0..1" />
@@ -28,11 +36,28 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__todos__todo_type__37A5467C">
+    <End Role="todo_type" Type="Self.todo_type" Multiplicity="0..1" />
+    <End Role="todos" Type="Self.todos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="todo_type">
+        <PropertyRef Name="todo_type_cd" />
+      </Principal>
+      <Dependent Role="todos">
+        <PropertyRef Name="todo_type_cd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="Nishant_DBModelStoreContainer">
     <EntitySet Name="todo_sts" EntityType="Self.todo_sts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="todo_type" EntityType="Self.todo_type" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="todos" EntityType="Self.todos" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__todos__st_cd__276EDEB3" Association="Self.FK__todos__st_cd__276EDEB3">
       <End Role="todo_sts" EntitySet="todo_sts" />
+      <End Role="todos" EntitySet="todos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__todos__todo_type__37A5467C" Association="Self.FK__todos__todo_type__37A5467C">
+      <End Role="todo_type" EntitySet="todo_type" />
       <End Role="todos" EntitySet="todos" />
     </AssociationSet>
   </EntityContainer>

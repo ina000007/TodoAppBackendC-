@@ -12,10 +12,19 @@
     <EntitySetMapping Name="todos">
       <EntityTypeMapping TypeName="Nishant_DBModel.todo">
         <MappingFragment StoreEntitySet="todos">
+          <ScalarProperty Name="todo_type_cd" ColumnName="todo_type_cd" />
           <ScalarProperty Name="todo_id" ColumnName="todo_id" />
           <ScalarProperty Name="descpt" ColumnName="descpt" />
           <ScalarProperty Name="st_cd" ColumnName="st_cd" />
           <ScalarProperty Name="crt_dt" ColumnName="crt_dt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="todo_type">
+      <EntityTypeMapping TypeName="Nishant_DBModel.todo_type">
+        <MappingFragment StoreEntitySet="todo_type">
+          <ScalarProperty Name="todo_type_desc" ColumnName="todo_type_desc" />
+          <ScalarProperty Name="todo_type_cd" ColumnName="todo_type_cd" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

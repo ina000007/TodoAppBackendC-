@@ -115,5 +115,16 @@ namespace TodoApp.Controllers
         {
             return db.todos.Count(e => e.todo_id == id) > 0;
         }
+
+        [Route("api/todoes/catatory/{cataId}")]
+        // GET: api/tasks_table
+        [HttpGet]
+        public IQueryable Getselectedtasks_table(int cataId)
+        {
+            var display_data = db.todos;
+            Console.WriteLine("cataId is: "+cataId);
+            return display_data.Where(t => t.todo_type_cd == cataId);
+
+        }
     }
 }

@@ -4,13 +4,20 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Nishant_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Nishant_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="todo_sts">
           <Key>
             <PropertyRef Name="st_cd" />
           </Key>
           <Property Name="st_cd" Type="int" Nullable="false" />
           <Property Name="st_desc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="todo_type">
+          <Key>
+            <PropertyRef Name="todo_type_cd" />
+          </Key>
+          <Property Name="todo_type_cd" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="todo_type_desc" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="todos">
           <Key>
@@ -20,6 +27,7 @@
           <Property Name="descpt" Type="varchar" MaxLength="1500" />
           <Property Name="st_cd" Type="int" />
           <Property Name="crt_dt" Type="datetime" />
+          <Property Name="todo_type_cd" Type="int" />
         </EntityType>
         <Association Name="FK__todos__st_cd__276EDEB3">
           <End Role="todo_sts" Type="Self.todo_sts" Multiplicity="0..1" />
@@ -33,16 +41,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__todos__todo_type__37A5467C">
+          <End Role="todo_type" Type="Self.todo_type" Multiplicity="0..1" />
+          <End Role="todos" Type="Self.todos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="todo_type">
+              <PropertyRef Name="todo_type_cd" />
+            </Principal>
+            <Dependent Role="todos">
+              <PropertyRef Name="todo_type_cd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Nishant_DBModelStoreContainer">
           <EntitySet Name="todo_sts" EntityType="Self.todo_sts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="todo_type" EntityType="Self.todo_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="todos" EntityType="Self.todos" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__todos__st_cd__276EDEB3" Association="Self.FK__todos__st_cd__276EDEB3">
             <End Role="todo_sts" EntitySet="todo_sts" />
             <End Role="todos" EntitySet="todos" />
           </AssociationSet>
+          <AssociationSet Name="FK__todos__todo_type__37A5467C" Association="Self.FK__todos__todo_type__37A5467C">
+            <End Role="todo_type" EntitySet="todo_type" />
+            <End Role="todos" EntitySet="todos" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Nishant_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -63,6 +87,8 @@
           <Property Name="st_cd" Type="Int32" />
           <Property Name="crt_dt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="todo_sts" Relationship="Self.FK__todos__st_cd__276EDEB3" FromRole="todos" ToRole="todo_sts" />
+          <Property Name="todo_type_cd" Type="Int32" />
+          <NavigationProperty Name="todo_type" Relationship="Nishant_DBModel.FK__todos__todo_type__37A5467C" FromRole="todo" ToRole="todo_type" />
         </EntityType>
         <Association Name="FK__todos__st_cd__276EDEB3">
           <End Role="todo_sts" Type="Self.todo_sts" Multiplicity="0..1" />
@@ -83,7 +109,32 @@
             <End Role="todo_sts" EntitySet="todo_sts" />
             <End Role="todos" EntitySet="todos" />
           </AssociationSet>
+          <EntitySet Name="todo_type" EntityType="Nishant_DBModel.todo_type" />
+          <AssociationSet Name="FK__todos__todo_type__37A5467C" Association="Nishant_DBModel.FK__todos__todo_type__37A5467C">
+            <End Role="todo_type" EntitySet="todo_type" />
+            <End Role="todo" EntitySet="todos" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="todo_type">
+          <Key>
+            <PropertyRef Name="todo_type_cd" />
+          </Key>
+          <Property Name="todo_type_cd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="todo_type_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="todos" Relationship="Nishant_DBModel.FK__todos__todo_type__37A5467C" FromRole="todo_type" ToRole="todo" />
+        </EntityType>
+        <Association Name="FK__todos__todo_type__37A5467C">
+          <End Type="Nishant_DBModel.todo_type" Role="todo_type" Multiplicity="0..1" />
+          <End Type="Nishant_DBModel.todo" Role="todo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="todo_type">
+              <PropertyRef Name="todo_type_cd" />
+            </Principal>
+            <Dependent Role="todo">
+              <PropertyRef Name="todo_type_cd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -101,10 +152,19 @@
           <EntitySetMapping Name="todos">
             <EntityTypeMapping TypeName="Nishant_DBModel.todo">
               <MappingFragment StoreEntitySet="todos">
+                <ScalarProperty Name="todo_type_cd" ColumnName="todo_type_cd" />
                 <ScalarProperty Name="todo_id" ColumnName="todo_id" />
                 <ScalarProperty Name="descpt" ColumnName="descpt" />
                 <ScalarProperty Name="st_cd" ColumnName="st_cd" />
                 <ScalarProperty Name="crt_dt" ColumnName="crt_dt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="todo_type">
+            <EntityTypeMapping TypeName="Nishant_DBModel.todo_type">
+              <MappingFragment StoreEntitySet="todo_type">
+                <ScalarProperty Name="todo_type_desc" ColumnName="todo_type_desc" />
+                <ScalarProperty Name="todo_type_cd" ColumnName="todo_type_cd" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

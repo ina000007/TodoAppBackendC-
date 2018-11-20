@@ -17,6 +17,8 @@
     <Property Name="st_cd" Type="Int32" />
     <Property Name="crt_dt" Type="DateTime" Precision="3" />
     <NavigationProperty Name="todo_sts" Relationship="Self.FK__todos__st_cd__276EDEB3" FromRole="todos" ToRole="todo_sts" />
+    <Property Name="todo_type_cd" Type="Int32" />
+    <NavigationProperty Name="todo_type" Relationship="Nishant_DBModel.FK__todos__todo_type__37A5467C" FromRole="todo" ToRole="todo_type" />
   </EntityType>
   <Association Name="FK__todos__st_cd__276EDEB3">
     <End Role="todo_sts" Type="Self.todo_sts" Multiplicity="0..1" />
@@ -37,5 +39,30 @@
       <End Role="todo_sts" EntitySet="todo_sts" />
       <End Role="todos" EntitySet="todos" />
     </AssociationSet>
+    <EntitySet Name="todo_type" EntityType="Nishant_DBModel.todo_type" />
+    <AssociationSet Name="FK__todos__todo_type__37A5467C" Association="Nishant_DBModel.FK__todos__todo_type__37A5467C">
+      <End Role="todo_type" EntitySet="todo_type" />
+      <End Role="todo" EntitySet="todos" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="todo_type">
+    <Key>
+      <PropertyRef Name="todo_type_cd" />
+    </Key>
+    <Property Name="todo_type_cd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="todo_type_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="todos" Relationship="Nishant_DBModel.FK__todos__todo_type__37A5467C" FromRole="todo_type" ToRole="todo" />
+  </EntityType>
+  <Association Name="FK__todos__todo_type__37A5467C">
+    <End Type="Nishant_DBModel.todo_type" Role="todo_type" Multiplicity="0..1" />
+    <End Type="Nishant_DBModel.todo" Role="todo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="todo_type">
+        <PropertyRef Name="todo_type_cd" />
+      </Principal>
+      <Dependent Role="todo">
+        <PropertyRef Name="todo_type_cd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

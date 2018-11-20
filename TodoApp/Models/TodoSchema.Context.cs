@@ -18,8 +18,6 @@ namespace TodoApp.Models
         public Nishant_DBEntities()
             : base("name=Nishant_DBEntities")
         {
-            this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -29,6 +27,6 @@ namespace TodoApp.Models
     
         public virtual DbSet<todo_sts> todo_sts { get; set; }
         public virtual DbSet<todo> todos { get; set; }
-
+        public virtual DbSet<todo_type> todo_type { get; set; }
     }
 }

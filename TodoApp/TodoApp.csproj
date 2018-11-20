@@ -113,6 +113,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\todoesController.cs" />
     <Compile Include="Controllers\todo_stsController.cs" />
+    <Compile Include="Controllers\todo_typeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -135,6 +136,9 @@
       <DependentUpon>TodoSchema.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\todo_sts.cs">
+      <DependentUpon>TodoSchema.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\todo_type.cs">
       <DependentUpon>TodoSchema.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

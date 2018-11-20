@@ -26,6 +26,8 @@ namespace TodoApp
                 "Region/{regionId}/Countries",
                 new { controller = "Region", action = "GetCountries"}
                 );
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
+= Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 
         }
     }
